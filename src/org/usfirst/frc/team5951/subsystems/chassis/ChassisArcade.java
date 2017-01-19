@@ -1,13 +1,14 @@
 package org.usfirst.frc.team5951.subsystems.chassis;
 
-import javax.security.auth.login.CredentialNotFoundException;
-
+import org.usfirst.frc.team5951.robot.RobotMap;
 import org.usfirst.frc.team5951.util.ChassisMath;
 
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.TalonControlMode;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 /**
  * Subsystem for the chassis subsystem.
@@ -15,10 +16,14 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
  */
 public class ChassisArcade {
 	
+	//Talons
 	private CANTalon chassisLeftFront;
 	private CANTalon chassisLeftRear;
 	private CANTalon chassisRightFront;
 	private CANTalon chassisRightRear;
+	
+	//Solenoids (Shifters)
+	private DoubleSolenoid shiftersPiston;
 	
 	private ADXRS450_Gyro gyro;
 	
@@ -36,6 +41,9 @@ public class ChassisArcade {
 		chassisLeftRear.changeControlMode(TalonControlMode.Follower);
 		chassisRightFront.changeControlMode(TalonControlMode.PercentVbus);
 		chassisRightRear.changeControlMode(TalonControlMode.Follower);
+		
+		//Pneumatics Init
+		shiftersPiston = new DoubleSolenoid(RobotMap.k_PCM, RobotMap.k_CHASSIS_SHIFTERS_OPEN, RobotMap.k_CHASSIS_SHIFTERS_CLOSE);
 		
 		//Gyro init
 		gyro = ChassisComponents.gyro;
@@ -98,4 +106,26 @@ public class ChassisArcade {
 		}
 	}
 	
+	/**
+	 * Shifts the chassis into the high gear. 
+	 */
+	public void switchToHighGear(){
+		//TODO Check what position is forward and what position is reverse for the piston (extended = high or low gear).
+		this.shiftersPiston.set(Value.kForward);
+	}
+	
+	/**
+	 * Shifts the chassis into the low gear.
+	 */
+	public void switchToLowGear(){
+		//TODO Check what position is forward and what position is reverse for the piston (extended = high or low gear).
+		this.shiftersPiston.set(Value.kReverse);
+	}
+	
+	/**
+	 * Toggles the shifters between high and low gear.
+	 */
+	public void toggleShifters(){
+		this.shiftersPiston.set(this.shiftersPiston.get().equals(Value.kForward) ? Value.kReverse : Value.kForward);
+	}
 }

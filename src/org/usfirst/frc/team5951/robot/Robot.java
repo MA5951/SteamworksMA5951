@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5951.robot;
 
+import org.usfirst.frc.team5951.subsystems.chassis.ChassisArcade;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 
 /**
@@ -11,13 +13,19 @@ import edu.wpi.first.wpilibj.IterativeRobot;
  */
 public class Robot extends IterativeRobot {
 
+	public static ChassisArcade chassisArcade;
+	
+	public Robot(){
+		chassisArcade = new ChassisArcade();
+	}
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
-		
+		chassisArcade.switchToLowGear();
 	}
 
 	/**

@@ -10,6 +10,13 @@ public class RobotMap {
 	public static final int k_CHASSIS_LEFT_REAR_TALON = 4;
 	
 	
+	//Pneumatics
+	public static final int k_PCM = 1;
+	
+	public static final int k_CHASSIS_SHIFTERS_OPEN = 1;
+	public static final int k_CHASSIS_SHIFTERS_CLOSE = 2;
+	
+	
 	//Sensors
 	//Chassis Encoders
 	public static final int k_CHASSIS_ENCODER_LEFT_A = 1;
