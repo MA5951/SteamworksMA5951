@@ -43,7 +43,7 @@ public class ChassisArcade {
 		chassisRightRear.changeControlMode(TalonControlMode.Follower);
 		
 		//Pneumatics Init
-		shiftersPiston = new DoubleSolenoid(RobotMap.k_PCM, RobotMap.k_CHASSIS_SHIFTERS_OPEN, RobotMap.k_CHASSIS_SHIFTERS_CLOSE);
+		shiftersPiston = ChassisComponents.chassisShifters;
 		
 		//Gyro init
 		gyro = ChassisComponents.gyro;

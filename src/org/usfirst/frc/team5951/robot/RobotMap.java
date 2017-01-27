@@ -1,7 +1,9 @@
 package org.usfirst.frc.team5951.robot;
 
 public class RobotMap {
-
+	
+	//TODO Find real ports.
+	
 	//Talons
 	//Chassis
 	public static final int k_CHASSIS_RIGHT_FRONT_TALON = 1;
