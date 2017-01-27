@@ -1,6 +1,5 @@
 package org.usfirst.frc.team5951.subsystems.ascender;
 
-import org.usfirst.frc.team5951.robot.RobotMap;
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.TalonControlMode;
 
@@ -11,12 +10,17 @@ import com.ctre.CANTalon.TalonControlMode;
  */
 public class Ascender {
 	
+	//Declaring variables
 	private CANTalon ascenderTalon;
 	
+	/**
+	 * Constructor for {@code}{@link Ascander} subsystem.
+	 */
 	public Ascender(){
 		ascenderTalon = AscenderComponents.ascenderTalon;
 		ascenderTalon.changeControlMode(TalonControlMode.PercentVbus);
 	}
+	
 	/**
 	 * Lifts up the robot at the end of the game.
 	 */
@@ -32,7 +36,7 @@ public class Ascender {
 	}
 	
 	/**
-	 * Stop the ascender motor at any point, FailSafe.
+	 * Stop the ascender motor at any point.
 	 */
 	public void stopAscender(){
 		ascenderTalon.set(0);
