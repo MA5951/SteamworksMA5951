@@ -72,8 +72,8 @@ public class ChassisArcade {
 	 * @param rotateValue
 	 *            - Joystick's X value
 	 */
-	public void arcadeDrive(double moveValue, double rotateValue) {
-		double[] chassisValues = ChassisMath.calculatePower(moveValue, rotateValue);
+	public void arcadeDrive(double moveValue, double rotateValue, boolean boost) {
+		double[] chassisValues = ChassisMath.calculatePower(boost ? 1 : moveValue, rotateValue);
 
 		setLeftPower(chassisValues[0]);
 		setRightPower(chassisValues[1]);
@@ -144,7 +144,7 @@ public class ChassisArcade {
 		double gyroError = 0;
 
 		while (((chassisEncoderLeft.getDistance() < distance - 0.1) || (chassisEncoderLeft.getDistance() > distance + 0.1)) && (gyro.getAngle() != 0)) {
-			this.arcadeDrive(distanceError * kP_DISTANCE, gyroError * kP_ANGLE);
+			this.arcadeDrive(distanceError * kP_DISTANCE, gyroError * kP_ANGLE, false);
 
 			distanceError = distance - chassisEncoderLeft.getDistance();
 			gyroError = gyro.getAngle() < 180 ? gyro.getAngle() : -(360 - gyro.getAngle());
@@ -155,8 +155,7 @@ public class ChassisArcade {
 	 * Shifts the chassis into the high gear.
 	 */
 	public void switchToHighGear() {
-		// TODO Check what position is forward and what position is reverse for
-		// the piston (extended = high or low gear).
+		// TODO Check what position is forward and what position is reverse for the piston (extended = high or low gear).
 		this.shiftersPiston.set(Value.kForward);
 	}
 
@@ -164,8 +163,7 @@ public class ChassisArcade {
 	 * Shifts the chassis into the low gear.
 	 */
 	public void switchToLowGear() {
-		// TODO Check what position is forward and what position is reverse for
-		// the piston (extended = high or low gear).
+		// TODO Check what position is forward and what position is reverse for the piston (extended = high or low gear).
 		this.shiftersPiston.set(Value.kReverse);
 	}
 
