@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 public class Crepe {
 
 	// Declaring variables
-	private DoubleSolenoid crepeSolenoid;
+	private DoubleSolenoid crepeSolenoid; //TODO find real values and ports for solenoid.
 	private boolean isCrepeOpen; // boolean of the current status of the crepe
 									// (is it open or closed?)
 
