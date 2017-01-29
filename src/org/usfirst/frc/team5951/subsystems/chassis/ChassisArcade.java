@@ -1,5 +1,7 @@
 package org.usfirst.frc.team5951.subsystems.chassis;
 
+import javax.xml.ws.soap.Addressing;
+
 import org.usfirst.frc.team5951.util.ChassisMath;
 
 import com.ctre.CANTalon;
@@ -98,7 +100,7 @@ public class ChassisArcade {
 	 */
 	public void setRightPower(double power) {
 		this.chassisRightFront.set(power);
-		this.chassisRightRear.set(chassisRightFront.getDeviceID());
+		this.chassisRightRear.set(this.chassisRightFront.getDeviceID());
 	}
 
 	/**
@@ -121,13 +123,15 @@ public class ChassisArcade {
 		if (angle < 0) {
 			angle = 360 - angle;
 			while (this.gyro.getAngle() > angle + 2 && this.gyro.getAngle() < angle - 2) {
-				this.setLeftPower(0.3);
+				this.setRightPower(0.3);
 			}
 		} else {
 			while (this.gyro.getAngle() > angle + 2 && this.gyro.getAngle() < angle - 2) {
-				this.setRightPower(0.3);
+				this.setLeftPower(0.3);
 			}
 		}
+		
+		this.stopChassis();
 	}
 
 	/**
@@ -135,6 +139,7 @@ public class ChassisArcade {
 	 * Drives straight a certain distance, for now this is only 
 	 * @param distance
 	 */
+	@SuppressWarnings("Untested")
 	public void driveStraight(double distance) {
 		gyro.reset();
 		chassisEncoderLeft.reset();
@@ -149,6 +154,7 @@ public class ChassisArcade {
 			distanceError = distance - chassisEncoderLeft.getDistance();
 			gyroError = gyro.getAngle() < 180 ? gyro.getAngle() : -(360 - gyro.getAngle());
 		}
+		this.stopChassis();
 	}
 
 	/**
