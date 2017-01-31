@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,6 +26,16 @@ public class Robot extends IterativeRobot {
 	
 	public static Joystick driver;
 	public static XboxController systemsDriver;
+	
+	//Threads
+	Thread cameraThread;
+	
+	//Sendable Choosers for autonomous
+	public SendableChooser<String> startingPosition;
+	public SendableChooser<Boolean> dropGear;
+	public SendableChooser<Boolean> passLine;
+	public SendableChooser<Boolean> doNothing;
+	public SendableChooser<Boolean> goBack;
 
 	public Robot() {
 		chassisArcade = new ChassisArcade();
@@ -39,7 +51,7 @@ public class Robot extends IterativeRobot {
 		
 		driver = new Joystick(ButtonPorts.k_DRIVER_JOYSTICK);
 		systemsDriver = new XboxController(ButtonPorts.k_SYSTEMS_DRIVER_JOYSTICKS);
-		Thread t = new Thread(() -> {
+		cameraThread = new Thread(() -> {
 
 			boolean allowCam1 = false;
 
@@ -76,8 +88,34 @@ public class Robot extends IterativeRobot {
 			}
 
 		});
-		t.setDaemon(true);
-		t.start();
+		cameraThread.setDaemon(true);
+		
+		//Sendable Choosers init
+		startingPosition = new SendableChooser<>();
+		startingPosition.addDefault("Left", "left");
+		startingPosition.addObject("Middle", "middle");
+		startingPosition.addObject("Reich", "Right");
+		SmartDashboard.putData("Starting position", startingPosition);
+		
+		dropGear = new SendableChooser<>();
+		dropGear.addDefault("Drop gear in dildo", true);
+		dropGear.addObject("Don't drop the gear", false);
+		SmartDashboard.putData("Drop gears?", dropGear);
+		
+		passLine = new SendableChooser<>();
+		passLine.addDefault("Pass line after gear drop", true);
+		passLine.addObject("Stay under airship", false);
+		SmartDashboard.putData("Line pass", passLine);
+		
+		doNothing = new SendableChooser<>();
+		doNothing.addDefault("Do something", true);
+		doNothing.addObject("Be a feminist", false);
+		SmartDashboard.putData("What to do", doNothing);
+		
+		goBack = new SendableChooser<>();
+		goBack.addDefault("There's no way back", false);
+		goBack.addObject("GET BACK TO THE HOPPER", true);
+		SmartDashboard.putData("Go back, or don't go back. that is the question", goBack);
 	}
 
 	/**
@@ -86,6 +124,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		chassisArcade.switchToLowGear();
+		
 	}
 
 	/**
@@ -103,6 +142,7 @@ public class Robot extends IterativeRobot {
 	public void teleopInit() {
 		chassisArcade.stopChassis();
 		chassisArcade.switchToHighGear();
+		cameraThread.start();
 	}
 
 	/**
