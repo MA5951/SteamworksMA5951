@@ -54,6 +54,7 @@ public class ChassisArcade {
 
 		// Pneumatics Init
 		shiftersPiston = ChassisComponents.chassisShifters;
+		this.switchToLowGear();
 
 		// Gyro init
 		gyro = ChassisComponents.gyro;

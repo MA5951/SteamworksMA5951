@@ -1,7 +1,11 @@
 package org.usfirst.frc.team5951.robot;
 
 import org.opencv.core.Mat;
+import org.usfirst.frc.team5951.autonomous.AutonomousRunner;
+import org.usfirst.frc.team5951.subsystems.ascender.Ascender;
 import org.usfirst.frc.team5951.subsystems.chassis.ChassisArcade;
+import org.usfirst.frc.team5951.subsystems.crepe.Crepe;
+import org.usfirst.frc.team5951.subsystems.intake.IntakeAndShooter;
 
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
@@ -23,6 +27,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 
 	public static ChassisArcade chassisArcade;
+	public static Crepe crepe;
+	public static Ascender ascender;
+	public static IntakeAndShooter intakeAndShooter;
 	
 	public static Joystick driver;
 	public static XboxController systemsDriver;
@@ -37,17 +44,16 @@ public class Robot extends IterativeRobot {
 	public SendableChooser<Boolean> doNothing;
 	public SendableChooser<Boolean> goBack;
 
-	public Robot() {
-		chassisArcade = new ChassisArcade();
-	}
-
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	@Override
 	public void robotInit() {
-		chassisArcade.switchToLowGear();
+		chassisArcade = new ChassisArcade();
+		crepe = new Crepe();
+		ascender = new Ascender();
+		intakeAndShooter = new IntakeAndShooter();
 		
 		driver = new Joystick(ButtonPorts.k_DRIVER_JOYSTICK);
 		systemsDriver = new XboxController(ButtonPorts.k_SYSTEMS_DRIVER_JOYSTICKS);
@@ -124,7 +130,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		chassisArcade.switchToLowGear();
-		
+		AutonomousRunner.run(startingPosition.getSelected(), dropGear.getSelected(), passLine.getSelected(), doNothing.getSelected(), goBack.getSelected());
 	}
 
 	/**
