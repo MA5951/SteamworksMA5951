@@ -25,6 +25,7 @@ public class ChassisComponents {
 	public static final DoubleSolenoid chassisShifters = new DoubleSolenoid(RobotMap.k_PCM, RobotMap.k_CHASSIS_SHIFTERS_OPEN, RobotMap.k_CHASSIS_SHIFTERS_CLOSE);
 	
 	//Encoders
+	//TODO Check if magnetic encoders or not
 	public static final Encoder chassisEncoderLeft = new Encoder(RobotMap.k_CHASSIS_ENCODER_LEFT_A, RobotMap.k_CHASSIS_ENCODER_LEFT_B);
 	public static final Encoder chassisEncoderRight = new Encoder(RobotMap.k_CHASSIS_ENCODER_RIGHT_A, RobotMap.k_CHASSIS_ENCODER_RIGHT_B);
 	

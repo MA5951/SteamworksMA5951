@@ -1,7 +1,7 @@
 package org.usfirst.frc.team5951.robot;
 
 public class RobotMap {
-	//TODO Find real ports.
+	//TWEEK Find real ports.
 	
 	//Talons
 	//Chassis
@@ -17,14 +17,8 @@ public class RobotMap {
 	public static final int k_CHASSIS_SHIFTERS_OPEN = 1;
 	public static final int k_CHASSIS_SHIFTERS_CLOSE = 2;
 	
-	
-	//Sensors
-	//Chassis Encoders
-	public static final int k_CHASSIS_ENCODER_LEFT_A = 1;
-	public static final int k_CHASSIS_ENCODER_LEFT_B = 2;
-	public static final int k_CHASSIS_ENCODER_RIGHT_A = 3;
-	public static final int k_CHASSIS_ENCODER_RIGHT_B = 4;
 
+	//Intake talons
 	public static final int k_INTAKE_FRONT_TALON=5;
 	public static final int k_INTAKE_REAR_TALON=6;
 	
@@ -34,4 +28,11 @@ public class RobotMap {
 	
 	//Ascender ports
 	public static final int k_ASCENDER_TALON = 0;
+	
+	//Sensors
+	//Chassis Encoders
+	public static final int k_CHASSIS_ENCODER_LEFT_A = 1;
+	public static final int k_CHASSIS_ENCODER_LEFT_B = 2;
+	public static final int k_CHASSIS_ENCODER_RIGHT_A = 3;
+	public static final int k_CHASSIS_ENCODER_RIGHT_B = 4;
 }
