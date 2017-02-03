@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 /**
- * the crepe system opens and closes so it can take gears on the target.
+ * the crepe system opens and closes so it can take gears to the target.
  * 
  * @author Omer Libai
  */
@@ -12,7 +12,7 @@ public class Crepe {
 
 	// Declaring variables
 	private DoubleSolenoid crepeSolenoid;
-	private boolean isCrepeOpen; // boolean of the current status of the crepe
+	 boolean isCrepeOpen; // boolean of the current status of the crepe
 									// (is it open or closed?)
 
 	/**
