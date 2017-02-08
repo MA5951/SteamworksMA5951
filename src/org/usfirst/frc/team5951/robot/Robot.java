@@ -100,11 +100,11 @@ public class Robot extends IterativeRobot {
 		startingPosition = new SendableChooser<>();
 		startingPosition.addDefault("Left", "left");
 		startingPosition.addObject("Middle", "middle");
-		startingPosition.addObject("Reich", "Right");
+		startingPosition.addObject("Right", "Right");
 		SmartDashboard.putData("Starting position", startingPosition);
 		
 		dropGear = new SendableChooser<>();
-		dropGear.addDefault("Drop gear in dildo", true);
+		dropGear.addDefault("Drop gear in peg", true);
 		dropGear.addObject("Don't drop the gear", false);
 		SmartDashboard.putData("Drop gears?", dropGear);
 		
@@ -115,12 +115,12 @@ public class Robot extends IterativeRobot {
 		
 		doNothing = new SendableChooser<>();
 		doNothing.addDefault("Do something", true);
-		doNothing.addObject("Be a feminist", false);
+		doNothing.addObject("Stay in place", false);
 		SmartDashboard.putData("What to do", doNothing);
 		
 		goBack = new SendableChooser<>();
-		goBack.addDefault("There's no way back", false);
-		goBack.addObject("GET BACK TO THE HOPPER", true);
+		goBack.addDefault("Stay in place", false);
+		goBack.addObject("Go back after auto", true);
 		SmartDashboard.putData("Go back, or don't go back. that is the question", goBack);
 	}
 
